@@ -18,8 +18,34 @@ class TweetTableViewCell: UITableViewCell {
 
     var tweet: Twitter.Tweet? { didSet { updateUI() } }
     
+    private func highlightedText(for tweet: Twitter.Tweet?) -> NSMutableAttributedString? {
+        if let currentTweet = tweet {
+            let highlightedTweetText = NSMutableAttributedString(string:currentTweet.text)
+            
+            func highlightWordsInLıst(_ mentions: Array<Mention>, withColor color: UIColor) {
+                for item in mentions {
+                    highlightedTweetText.addAttribute(NSForegroundColorAttributeName, value: color, range: item.nsrange)
+                }
+            }
+            
+            highlightWordsInLıst(currentTweet.hashtags, withColor: MentionColors.hashtagColor)
+            highlightWordsInLıst(currentTweet.urls, withColor: MentionColors.urlColor)
+            highlightWordsInLıst(currentTweet.userMentions, withColor: MentionColors.userMentionColor)
+            
+            return highlightedTweetText
+        } else {
+            return nil
+        }
+    }
+    
+    private struct MentionColors {
+        static let hashtagColor:     UIColor = .cyan
+        static let urlColor:         UIColor = .blue
+        static let userMentionColor: UIColor = .orange
+    }
+    
     private func updateUI() {
-        tweetTextLabel?.text = tweet?.text
+        tweetTextLabel?.attributedText = highlightedText(for: tweet)
         tweetUserLabel?.text = tweet?.user.description
         
         if let profileImageURL = tweet?.user.profileImageURL {

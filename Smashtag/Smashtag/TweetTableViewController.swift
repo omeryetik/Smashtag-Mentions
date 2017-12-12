@@ -13,7 +13,51 @@ class TweetTableViewController: UITableViewController, UITextFieldDelegate {
 
     // MARK: - Model
 
-    private var tweets = [Array<Twitter.Tweet>]()
+    private var tweets = [Array<Twitter.Tweet>]() {
+        didSet {
+            print(tweets)
+//            enhancedTweets = tweets.map { arrayOfTweets in
+//                return arrayOfTweets.map { item in
+//                    var enhancedTweet = EnhancedTweet()
+//                    enhancedTweet.tweet = item
+//                    return enhancedTweet
+//                }
+//            }
+        }
+    }
+    
+//    private var enhancedTweets = [Array<EnhancedTweet>]()
+    
+//    Assignment #4 Tasks - Begin
+    
+//    private struct EnhancedTweet {
+//        var tweet: Twitter.Tweet?
+//        var highlightedText: NSAttributedString? {
+//            if let currentTweet = tweet {
+//                let highlightedTweetText = NSMutableAttributedString(string:currentTweet.text)
+//                
+//                for item in currentTweet.hashtags {
+//                    highlightedTweetText.addAttribute(NSForegroundColorAttributeName, value: UIColor.red, range: item.nsrange)
+//                }
+//            
+//                for item in currentTweet.urls {
+//                    highlightedTweetText.addAttribute(NSForegroundColorAttributeName, value: UIColor.blue, range: item.nsrange)
+//                }
+//                
+//                for item in currentTweet.userMentions {
+//                    highlightedTweetText.addAttribute(NSForegroundColorAttributeName, value: UIColor.green, range: item.nsrange)
+//                }
+//
+//            
+//                return highlightedTweetText
+//            } else {
+//                return nil
+//            }
+//        }
+//    }
+    
+//    Assignment #4 Tasks - End
+    
     
     var searchText: String? {
         didSet {
