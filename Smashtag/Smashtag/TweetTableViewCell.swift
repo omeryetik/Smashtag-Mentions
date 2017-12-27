@@ -16,21 +16,23 @@ class TweetTableViewCell: UITableViewCell {
     @IBOutlet weak var tweetTextLabel: UILabel!
     @IBOutlet weak var tweetCreatedLabel: UILabel!
 
+    // MARK: - Cell content: Tweet to be displayed
     var tweet: Twitter.Tweet? { didSet { updateUI() } }
     
+    // Highlight mentions in tweet body accordingly.
     private func highlightedText(for tweet: Twitter.Tweet?) -> NSMutableAttributedString? {
         if let currentTweet = tweet {
             let highlightedTweetText = NSMutableAttributedString(string:currentTweet.text)
             
-            func highlightWordsInLıst(_ mentions: Array<Mention>, withColor color: UIColor) {
-                for item in mentions {
+            func highlightWordsInCollection(_ collection: Array<Mention>, withColor color: UIColor) {
+                for item in collection {
                     highlightedTweetText.addAttribute(NSForegroundColorAttributeName, value: color, range: item.nsrange)
                 }
             }
             
-            highlightWordsInLıst(currentTweet.hashtags, withColor: MentionColors.hashtagColor)
-            highlightWordsInLıst(currentTweet.urls, withColor: MentionColors.urlColor)
-            highlightWordsInLıst(currentTweet.userMentions, withColor: MentionColors.userMentionColor)
+            highlightWordsInCollection(currentTweet.hashtags, withColor: MentionColors.hashtagColor)
+            highlightWordsInCollection(currentTweet.urls, withColor: MentionColors.urlColor)
+            highlightWordsInCollection(currentTweet.userMentions, withColor: MentionColors.userMentionColor)
             
             return highlightedTweetText
         } else {
@@ -38,11 +40,7 @@ class TweetTableViewCell: UITableViewCell {
         }
     }
     
-    private struct MentionColors {
-        static let hashtagColor:     UIColor = .cyan
-        static let urlColor:         UIColor = .blue
-        static let userMentionColor: UIColor = .orange
-    }
+
     
     private func updateUI() {
         tweetTextLabel?.attributedText = highlightedText(for: tweet)
