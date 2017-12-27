@@ -68,11 +68,23 @@ class MentionTableViewController: UITableViewController {
                                                  items: currentTweet.urls.map { MentionType.url( $0.keyword ) } ) )
         }
         
+        // Extra Credit Task 1: Add tweet owner as a user mention
+        // - In such a case, the userMentions section of the table/data structure will never be empty. 
+        // - No need for isEmpty check
+        
+        // Add owner to the list of users first
+        var userCollection: [MentionType] = [MentionType.userMention("@\(currentTweet.user.screenName)")]
+
+        // If userMentions is not empty, append them next
         if currentTweet.userMentions.isEmpty {} else {
-            mentionsInTweet.append( MentionPack( type: TableProperties.headerForUserMentions,
-                                                 items: currentTweet.userMentions.map { MentionType.userMention( $0.keyword ) } ) )
+            userCollection.append( contentsOf: currentTweet.userMentions.map
+                { MentionType.userMention( $0.keyword ) } )
         }
         
+        // Now append the final array as a new section tot the table/data structure
+        mentionsInTweet.append( MentionPack( type: TableProperties.headerForUserMentions,
+                                             items: userCollection) )
+                
         return mentionsInTweet
     }
 
