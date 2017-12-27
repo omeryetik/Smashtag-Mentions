@@ -221,7 +221,12 @@ class MentionTableViewController: UITableViewController {
         if identifier == SegueIdentifiers.fromMentionToSearch {
             if let tweetTVC = destination as? TweetTableViewController,
                 let mentionCell = sender as? MentionedTextTableViewCell {
-                tweetTVC.searchText = mentionCell.mentionedText
+                // Extra Credit Task 2:
+                // If selected mention is a userMention, search not only for tweets mentioning
+                // this user but also for tweets by this user
+                var searchText = mentionCell.mentionedText ?? ""
+                searchText = searchText.hasPrefix("@") ? "\(searchText) OR from:\(searchText)" : searchText
+                tweetTVC.searchText = searchText
             }
         } else if identifier == SegueIdentifiers.fromMentionToImage {
             if let imageVC = destination as? ImageViewController,
