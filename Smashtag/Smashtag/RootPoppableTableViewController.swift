@@ -1,56 +1,63 @@
 //
-//  RecentsTableViewController.swift
+//  RootPoppableTableViewController.swift
 //  Smashtag
 //
-//  Created by Ömer Yetik on 26/12/2017.
+//  Created by Ömer Yetik on 28/12/2017.
 //  Copyright © 2017 Ömer Yetik. All rights reserved.
 //
 
 import UIKit
 
-class RecentsTableViewController: RootPoppableTableViewController {
+// Implemented for Assignment #4 Extra Credit Task 3. 
+// All UITableViewController classes in the project subclass this one.
+//
+class RootPoppableTableViewController: UITableViewController {
 
-    // MARK: - No public API needed
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        addCancelButton()
+    }
     
-    // MARK: - Private API
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
     
-    // Internal data structure. Set before view appears on screen
-    private var recentSearches: [String]? {
-        didSet {
-            tableView.reloadData()
+    // If I am not the rootViewController, show a Cancel button
+    // which pops up back to the root view controller
+    private func addCancelButton() {
+        if self != navigationController?.viewControllers.first {
+            let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(handlePopToRootViewController))
+            navigationItem.rightBarButtonItem = cancelButton
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        recentSearches = UserDefaults.standard.stringArray(forKey: Keys.keyForRecentsArray) ?? []
+    func handlePopToRootViewController() {
+        navigationController?.popToRootViewController(animated: true)
     }
 
     // MARK: - Table view data source
+
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        // #warning Incomplete implementation, return the number of sections
+        return 0
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return recentSearches!.count
+        // #warning Incomplete implementation, return the number of rows
+        return 0
     }
 
+    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.forRecents, for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
 
-        let recentSearchTerm = recentSearches?.reversed()[indexPath.row]
-        
-        cell.textLabel?.text = recentSearchTerm
+        // Configure the cell...
 
         return cell
     }
+    */
 
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath)
-        performSegue(withIdentifier: SegueIdentifiers.fromRecentToSearch, sender: cell)
-    }
-    
-    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -86,21 +93,14 @@ class RecentsTableViewController: RootPoppableTableViewController {
     }
     */
 
+    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let identifier = segue.identifier
-        let destination = segue.destination
-        
-        if identifier == SegueIdentifiers.fromRecentToSearch {
-            if let tweetVC = destination as? TweetTableViewController {
-                if let recentCell = sender as? UITableViewCell {
-                    tweetVC.searchText = recentCell.textLabel?.text
-                }
-            }
-        }
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
     }
-
+    */
 
 }

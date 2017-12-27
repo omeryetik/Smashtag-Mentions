@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1012EB1A1FEBB2170033BD16 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1012EB191FEBB2170033BD16 /* ImageViewController.swift */; };
+		1015C1301FF450A400797CC8 /* RootPoppableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1015C12F1FF450A400797CC8 /* RootPoppableTableViewController.swift */; };
 		101682F81FD47C8700275431 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 101682F71FD47C8700275431 /* AppDelegate.swift */; };
 		101682FD1FD47C8700275431 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 101682FB1FD47C8700275431 /* Main.storyboard */; };
 		101682FF1FD47C8700275431 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 101682FE1FD47C8700275431 /* Assets.xcassets */; };
@@ -39,6 +40,7 @@
 
 /* Begin PBXFileReference section */
 		1012EB191FEBB2170033BD16 /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
+		1015C12F1FF450A400797CC8 /* RootPoppableTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootPoppableTableViewController.swift; sourceTree = "<group>"; };
 		101682F41FD47C8700275431 /* Smashtag.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Smashtag.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		101682F71FD47C8700275431 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		101682FC1FD47C8700275431 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				101682FB1FD47C8700275431 /* Main.storyboard */,
+				1015C12F1FF450A400797CC8 /* RootPoppableTableViewController.swift */,
 				10388EA01FF2B4BA007D88DD /* SmashtagCommons.swift */,
 				1016830A1FD47D9200275431 /* TweetTableViewController.swift */,
 				101A70681FE028F100C5E364 /* MentionTableViewController.swift */,
@@ -196,6 +199,7 @@
 			files = (
 				101A789E1FEB099200365DB1 /* MentionedTextTableViewCell.swift in Sources */,
 				101A70691FE028F100C5E364 /* MentionTableViewController.swift in Sources */,
+				1015C1301FF450A400797CC8 /* RootPoppableTableViewController.swift in Sources */,
 				101682F81FD47C8700275431 /* AppDelegate.swift in Sources */,
 				1012EB1A1FEBB2170033BD16 /* ImageViewController.swift in Sources */,
 				10388EA11FF2B4BA007D88DD /* SmashtagCommons.swift in Sources */,

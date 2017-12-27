@@ -9,7 +9,7 @@
 import UIKit
 import Twitter
 
-class TweetTableViewController: UITableViewController, UITextFieldDelegate {
+class TweetTableViewController: RootPoppableTableViewController, UITextFieldDelegate {
 
     // MARK: - Model
 

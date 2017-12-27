@@ -10,7 +10,7 @@ import UIKit
 import Twitter
 import SafariServices
 
-class MentionTableViewController: UITableViewController {
+class MentionTableViewController: RootPoppableTableViewController {
 
     // MARK: - Public API
     
