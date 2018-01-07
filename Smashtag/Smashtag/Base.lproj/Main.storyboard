@@ -136,7 +136,13 @@
                             <outlet property="delegate" destination="aWl-1C-MIH" id="XEI-DP-EMs"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Recent Searches" id="edo-0z-u4Q"/>
+                    <navigationItem key="navigationItem" title="Recent Searches" id="edo-0z-u4Q">
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="d4g-Rg-hCa">
+                            <connections>
+                                <action selector="startEditing:" destination="aWl-1C-MIH" id="Acs-PZ-WDX"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <segue destination="i5o-FP-QwS" kind="show" identifier="Segue.show.tweets.from.recent" id="ncc-qZ-Zrb"/>
                     </connections>

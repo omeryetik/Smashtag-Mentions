@@ -153,11 +153,17 @@ class MentionTableViewController: RootPoppableTableViewController {
             case .url(let urlString):
                 // Selected mention is a URL. Open in Safari
                 if let url = URL(string: urlString) {
-                    if #available(iOS 10.0, *) {
-                        UIApplication.shared.open(url)
-                    } else {
-                        UIApplication.shared.openURL(url)
-                    }
+                    // Extra Credit #4: Use not Safari but an internal controller to show
+                    // web content in app
+                    let safariVC = SFSafariViewController(url: url, entersReaderIfAvailable: true)
+                    safariVC.modalPresentationStyle = .popover
+                    safariVC.modalTransitionStyle = .flipHorizontal
+                    present(safariVC, animated: true, completion: nil)
+//                    if #available(iOS 10.0, *) {
+//                        UIApplication.shared.open(url)
+//                    } else {
+//                        UIApplication.shared.openURL(url)
+//                    }
                 }
             default:
                 // Other text mentions, perform segue to TweetTableViewController 

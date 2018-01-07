@@ -66,7 +66,7 @@ class TweetTableViewController: RootPoppableTableViewController, UITextFieldDele
                 })
                 // Add the term now - either it existed before or never - and it will
                 // be on top of the list
-                recentSearches.append(searchText)
+                recentSearches.insert(searchText, at: 0)
                 UserDefaults.standard.set(recentSearches, forKey: Keys.keyForRecentsArray)
 
             } else {

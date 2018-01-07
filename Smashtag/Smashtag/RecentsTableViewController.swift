@@ -17,13 +17,24 @@ class RecentsTableViewController: RootPoppableTableViewController {
     // Internal data structure. Set before view appears on screen
     private var recentSearches: [String]? {
         didSet {
-            tableView.reloadData()
+            if isDeletingARow == false {
+                tableView.reloadData()
+            } else {
+                isDeletingARow = false
+            }
         }
     }
+    
+    private var isDeletingARow: Bool = false
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         recentSearches = UserDefaults.standard.stringArray(forKey: Keys.keyForRecentsArray) ?? []
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        UserDefaults.standard.set(recentSearches, forKey: Keys.keyForRecentsArray)
     }
 
     // MARK: - Table view data source
@@ -38,7 +49,7 @@ class RecentsTableViewController: RootPoppableTableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifiers.forRecents, for: indexPath)
 
-        let recentSearchTerm = recentSearches?.reversed()[indexPath.row]
+        let recentSearchTerm = recentSearches?[indexPath.row]
         
         cell.textLabel?.text = recentSearchTerm
 
@@ -50,41 +61,33 @@ class RecentsTableViewController: RootPoppableTableViewController {
         performSegue(withIdentifier: SegueIdentifiers.fromRecentToSearch, sender: cell)
     }
     
-    
-    /*
+    // MARK: - Delete Rows  
+    // -------------------------
+    // Extra Credit Task #5: Allow deletion of recent search terms.
     // Override to support conditional editing of the table view.
+    @IBAction func startEditing(_ sender: UIBarButtonItem) {
+        tableView.allowsMultipleSelectionDuringEditing = true
+        tableView.allowsSelectionDuringEditing = false
+        tableView.setEditing(true, animated: true)
+    }
+    
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
     }
-    */
 
-    /*
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            isDeletingARow = true
+            recentSearches?.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .bottom)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
+    //------------------------------
 
     // MARK: - Navigation
 
