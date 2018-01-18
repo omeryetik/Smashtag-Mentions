@@ -28,7 +28,9 @@ class RootPoppableTableViewController: UITableViewController {
     private func addCancelButton() {
         if self != navigationController?.viewControllers.first {
             let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(handlePopToRootViewController))
-            navigationItem.rightBarButtonItem = cancelButton
+            var rightBarButtonItems = navigationItem.rightBarButtonItems
+            rightBarButtonItems?.insert(cancelButton, at: 0)
+            navigationItem.rightBarButtonItems = rightBarButtonItems
         }
     }
     

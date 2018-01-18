@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Twitter
 
 struct MentionColors {
     static let hashtagColor:     UIColor = .brown
@@ -30,6 +31,9 @@ struct SegueIdentifiers {
     static let fromMentionToImage = "Segue.show.image"
     static let fromMentionToSearch = "Segue.show.tweets.from.mention"
     static let fromRecentToSearch = "Segue.show.tweets.from.recent"
+    static let fromTweetsToMentions = "Segue.show.mentions.from.tweets"
+    static let fromTweetsToImageCollection = "Segue.show.image.collection.from.tweets"
+    static let fromImageCollectionToTweets = "Segue.show.tweet.from.collection.to.tweets"
 }
 
 struct CellIdentifiers {
@@ -37,4 +41,13 @@ struct CellIdentifiers {
     static let forImageMentions = "Cell.mention.image"
     static let forTweets = "Cell.tweet"
     static let forRecents = "Cell.recent"
+    static let forImagesInTweetCollection = "Cell.tweet.collection.image"
 }
+
+struct UniqueTweetImage {
+    let image: MediaItem
+    let imageId: String
+    let tweet: Twitter.Tweet
+}
+
+var cache = NSCache<NSString, NSData>()

@@ -13,7 +13,7 @@ class TweetTableViewController: RootPoppableTableViewController, UITextFieldDele
 
     // MARK: - Model
 
-    private var tweets = [Array<Twitter.Tweet>]()
+    private var tweets = [Array<Twitter.Tweet>]() 
     
     var searchText: String? {
         didSet {
@@ -26,6 +26,13 @@ class TweetTableViewController: RootPoppableTableViewController, UITextFieldDele
             // Each time searchText is updated, a new search is initiated.
             // Add this to recent searches list
             addToRecentSearches(searchText)
+        }
+    }
+    
+    var newTweets = Array<Twitter.Tweet>() {
+        didSet {
+            tweets.insert(newTweets, at: 0)
+            tableView.insertSections([0], with: .fade)
         }
     }
     
@@ -121,16 +128,31 @@ class TweetTableViewController: RootPoppableTableViewController, UITextFieldDele
 
     // MARK: - Navigation
     
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if identifier == SegueIdentifiers.fromTweetsToImageCollection {
+            return searchText == nil ? false : true
+        }
+        return true
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let identifier = segue.identifier
         var destination = segue.destination
         
         if let navcon = destination as? UINavigationController {
             destination = navcon.visibleViewController ?? destination
         }
         
-        if let mTVC = destination as? MentionTableViewController {
-            if let tweetCell = sender as? TweetTableViewCell {
-                mTVC.tweet = tweetCell.tweet
+        if identifier == SegueIdentifiers.fromTweetsToMentions {
+            if let mTVC = destination as? MentionTableViewController {
+                if let tweetCell = sender as? TweetTableViewCell {
+                    mTVC.tweet = tweetCell.tweet
+                }
+            }
+        } else if identifier == SegueIdentifiers.fromTweetsToImageCollection {
+            if let tiCVC = destination as? TweetImagesCollectionViewController {
+                tiCVC.tweets = tweets[0]
+                tiCVC.title = "Images: \(searchText!)"
             }
         }
     }
