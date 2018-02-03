@@ -93,7 +93,7 @@ class TweetImagesCollectionViewController: UICollectionViewController {
                 if let tweetsTVC = destination as? TweetTableViewController {
                     if let indexPath = collectionView?.indexPath(for: cell) {
                         let tweet = tweetImageCollection[indexPath.row].tweet
-                        tweetsTVC.newTweets = [tweet]
+                        tweetsTVC.addNew(tweets: [tweet])
                     }
                 }
             }
